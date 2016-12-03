@@ -7,7 +7,6 @@ void UARTInit(u32 baud)
     //GPIO端口设置
     GPIO_InitTypeDef GPIO_InitStructure;
 		USART_InitTypeDef USART_InitStructure;
-		RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1|RCC_APB2Periph_GPIOA, ENABLE);	//使能USART1，GPIOA时钟
 		USART_DeInit(USART1);  //复位串口1
 		//USART1_TX   PA.9
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9; //PA.9

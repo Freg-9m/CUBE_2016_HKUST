@@ -1,13 +1,11 @@
 #include "timer.h"
-
+#include <stdio.h>
+int16_t Ecoder_Speed;
 
 void TIM3_Init(u16 Period,u16 Prescaler)
 {
 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
-
-	
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE); //时钟使能
-	
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
 	
 	TIM_TimeBaseStructure.TIM_Period          = Period; //设置在下一个更新事件装入活动的自动重装载寄存器周期的值	
 	TIM_TimeBaseStructure.TIM_Prescaler       = Prescaler; //设置用来作为TIMx时钟频率除数的预分频值
@@ -20,6 +18,21 @@ void TIM3_Init(u16 Period,u16 Prescaler)
 	TIM_Cmd(TIM3, ENABLE);  //使能TIMx					 
 }
 
+void TIM1_Init(u16 Period,u16 Prescaler)
+{
+	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
+	
+	TIM_TimeBaseStructure.TIM_Period          = Period; 
+	TIM_TimeBaseStructure.TIM_Prescaler       = Prescaler; 
+	TIM_TimeBaseStructure.TIM_ClockDivision   = TIM_CKD_DIV1; 
+	TIM_TimeBaseStructure.TIM_CounterMode     = TIM_CounterMode_Up; 
+	
+	TIM_TimeBaseInit(TIM1, &TIM_TimeBaseStructure);
+ 
+	TIM_ITConfig(TIM1,TIM_IT_Update,ENABLE );
+	TIM_Cmd(TIM1, ENABLE);  
+}
 
 void TIM3_PWM_Init(u16 Period,u16 Prescaler)
 {
@@ -74,16 +87,32 @@ void TIM3_IRQHandler(void)   //TIM3中断
 		}
 }
 
-
+//定时器1中断服务程序
+void TIM1_UP_IRQHandler(void)   //TIM3中断
+{
+	if (TIM_GetITStatus(TIM1, TIM_IT_Update) != RESET)  //检查TIM3更新中断发生与否
+		{
+		TIM_ClearITPendingBit(TIM1, TIM_IT_Update  );  //清除TIMx更新中断标志
+			
+		if (GPIO_ReadOutputDataBit(GPIOB, GPIO_Pin_8))
+		{
+				GPIO_WriteBit(GPIOB, GPIO_Pin_8, Bit_RESET);
+		}
+		else
+		{
+				GPIO_WriteBit(GPIOB, GPIO_Pin_8, Bit_SET);
+		}
+		Ecoder_Speed = TIM2->CNT;
+		TIM2->CNT = 0X0000;
+		printf("%d\r\n",Ecoder_Speed);
+		}
+}
 
 void TIM2_Ecoder_Init(void)
 {
 /********Ecoder******/
 	GPIO_InitTypeDef GPIO_InitStructure;
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
-	
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA , ENABLE);
-  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
  
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;

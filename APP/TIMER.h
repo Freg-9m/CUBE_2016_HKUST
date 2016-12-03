@@ -11,6 +11,7 @@ typedef enum
 }TimerDefine;
 
 void TIM3_Init(u16 Period,u16 Prescaler);
+void TIM1_Init(u16 Period,u16 Prescaler);
 void TIM3_PWM_Init(u16 Period,u16 Prescaler);
 void TIM2_Ecoder_Init(void);
  
