@@ -31,4 +31,5 @@
 ..\output\main.o: ..\Lib\FWlib\inc\misc.h
 ..\output\main.o: ..\APP\IORES.h
 ..\output\main.o: ..\APP\TIMER.h
+..\output\main.o: ..\User\include.h
 ..\output\main.o: ..\APP\UART.h

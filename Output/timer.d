@@ -29,3 +29,7 @@
 ..\output\timer.o: ..\Lib\FWlib\inc\stm32f10x_usart.h
 ..\output\timer.o: ..\Lib\FWlib\inc\stm32f10x_wwdg.h
 ..\output\timer.o: ..\Lib\FWlib\inc\misc.h
+..\output\timer.o: ..\User\include.h
+..\output\timer.o: ..\APP\IORES.h
+..\output\timer.o: ..\APP\TIMER.h
+..\output\timer.o: ..\APP\UART.h

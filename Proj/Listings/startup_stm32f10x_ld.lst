@@ -442,12 +442,12 @@ ARM Macro Assembler    Page 7
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
 ork --depend=..\output\startup_stm32f10x_ld.d -o..\output\startup_stm32f10x_ld.
-o -IC:\Users\dzhangas\Desktop\2016_Fall\Project\Cubli\stm32project\CUBE_1126\Pr
-oj\RTE -IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include -IC:\Keil_
-v5\ARM\CMSIS\Include --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VER
-SION SETA 521" --predefine="STM32F10X_MD SETA 1" --list=.\listings\startup_stm3
-2f10x_ld.lst ..\Lib\CMSIS\CM3\DeviceSupport\ST\STM32F10x\startup\arm\startup_st
-m32f10x_ld.s
+o -IC:\Users\dzhangas\Desktop\2016_Fall\Project\Cubli\stm32project\CUBE_2016_HK
+UST\Proj\RTE -IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include -IC:
+\Keil_v5\ARM\CMSIS\Include --predefine="__MICROLIB SETA 1" --predefine="__UVISI
+ON_VERSION SETA 521" --predefine="STM32F10X_MD SETA 1" --list=.\listings\startu
+p_stm32f10x_ld.lst ..\Lib\CMSIS\CM3\DeviceSupport\ST\STM32F10x\startup\arm\star
+tup_stm32f10x_ld.s
 
 
 
